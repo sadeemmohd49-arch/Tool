@@ -1034,17 +1034,21 @@
             compressedSize.textContent = `${compressedSizeKB} KB`;
             savedPercentage.textContent = `${savedPercent}%`;
         }
+function downloadCompressedImage() {
+    const compressedPreview = document.getElementById('compressedPreview');
 
-        function downloadCompressedImage() {
-            // In a real implementation, you would create a download link for the compressed image
-            alert('In a real implementation, this would download the compressed image. For this demo, the functionality is simulated.');
-            
-            // Example of how it would work:
-            // const link = document.createElement('a');
-            // link.download = 'compressed-image.jpg';
-            // link.href = compressedPreview.src;
-            // link.click();
-        }
+    if (compressedPreview && compressedPreview.src) {
+        const link = document.createElement('a');
+        link.download = 'compressed-image.jpg';
+        link.href = compressedPreview.src;
+        document.body.appendChild(link); // Firefox compatibility
+        link.click();
+        document.body.removeChild(link); // Cleanup
+    } else {
+        alert('Koi compressed image nahi mili. Pehle image upload aur compress karo.');
+    }
+}
+
 
         function resetTool() {
             fileInput.value = '';
